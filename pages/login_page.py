@@ -14,9 +14,9 @@ class LoginPage(BasePage):
         assert 'login' in CURRENT_URLL, f'expected "login" to be substring of URL'
 
     def should_be_login_form(self):
-        # реализуйте проверку, что есть форма логина
-        assert True
+        assert self.browser.find_element(*MainPageLocators.LOGIN_FORM_LINK), "Login form is not presented"
+        #assert True
 
     def should_be_register_form(self):
-        # реализуйте проверку, что есть форма регистрации на странице
-        assert True
+        assert self.browser.find_element(*MainPageLocators.REGISTER_FORM_LINK), "Register form is not presented"
+        #assert True
