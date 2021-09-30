@@ -6,34 +6,25 @@ from .locators import ProductPageLocators
 
 class ProductPage(BasePage):
     def add_to_basket(self):
-        add_to_basket_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
-        add_to_basket_button.click()
+        self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON).click()
 
     def get_price(self):
-        price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
-        return(price.text)
+        return self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
 
     def get_basket_price(self):
-        bkt_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE)
-        return(bkt_price.text)
+        return self.browser.find_element(*ProductPageLocators.BASKET_PRICE).text
 
     def get_name_of_product(self):
-        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
-        return(product_name.text)
+        return self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
 
     def get_name_of_added_to_basket_product(self):
-        product_name_in_message = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE)
-        return(product_name_in_message.text)
+        return self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE).text
 
     def check_the_prices_of_the_basket_and_the_item_should_be_the_same(self):
-        a = self.get_price()
-        b = self.get_basket_price()
-        assert a in b, "It was expected the price in basket and of the item should be the same."
+        assert self.get_price() in self.get_basket_price(), "Prices of added product and the product are unequal."
 
     def check_the_names_of_the_item_and_the_alert_should_be_the_same(self):
-        a = self.get_name_of_product()
-        b = self.get_name_of_added_to_basket_product()
-        assert a == b, "expected the name of current product and the name of the item on alert message should be the same."
+        assert self.get_name_of_product() == self.get_name_of_added_to_basket_product(), "Names of added product and the product are unequal."
 
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be."
