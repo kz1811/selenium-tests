@@ -2,6 +2,7 @@ import pytest
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
+from pages.basket_page import BasketPage
 import time
 
 @pytest.mark.skip
@@ -78,3 +79,17 @@ def test_guest_can_go_to_login_page_from_product_page (browser):
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+
+@pytest.mark.new
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    #Гость открывает страницу товара
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = ProductPage(browser, link)
+    page.open()
+    #Переходит в корзину по кнопке в шапке
+    page.go_to_basket()
+    page = BasketPage(browser, browser.current_url)
+    #Ожидаем, что в корзине нет товаров
+    page.should_not_be_any_items_in_basket()
+    #Ожидаем, что есть текст о том что корзина пуста
+    page.should_be_empty_cart_message()

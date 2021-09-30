@@ -7,7 +7,7 @@ from .locators import BasePageLocators
 
 class BasePage():
 
-    def __init__(self, browser, url, timeout=10):
+    def __init__(self, browser, url, timeout=60):
         self.browser = browser
         self.url = url
         #self.browser.implicitly_wait(5)
@@ -45,6 +45,10 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.browser.find_element(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_basket(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        basket_link.click()
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
