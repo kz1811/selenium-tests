@@ -9,5 +9,5 @@ class BasketPage(BasePage):
             "Empty basket message is not presented, but should be"
 
     def should_not_be_any_items_in_basket(self):
-        self.is_not_element_present(*BasketPageLocators.BASKET_ITEM_LINK), \
+        assert self.is_not_element_present(*BasketPageLocators.BASKET_ITEM_LINK), \
             "At least one item is presented in the basket, but should not be"

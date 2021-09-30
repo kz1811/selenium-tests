@@ -27,7 +27,7 @@ class ProductPage(BasePage):
 
     def check_the_prices_of_the_basket_and_the_item_should_be_the_same(self):
         a = self.get_price()
-        b = self.get_price_basket_price()
+        b = self.get_basket_price()
         assert a in b, "It was expected the price in basket and of the item should be the same."
 
     def check_the_names_of_the_item_and_the_alert_should_be_the_same(self):
